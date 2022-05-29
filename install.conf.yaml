@@ -1,0 +1,17 @@
+- default:
+    link:
+      relink: true
+      create: true
+
+- shell:
+    - description: Install submodules
+      command: "git submodule update --init --recursive"
+
+- clean:
+    ~/: true
+    ~/.config:
+      recursive: true
+
+- link:
+    ~/.config/nvim: nvim
+
