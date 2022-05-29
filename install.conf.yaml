@@ -1,4 +1,4 @@
-- default:
+- defaults:
     link:
       relink: true
       create: true
@@ -8,7 +8,6 @@
       command: "git submodule update --init --recursive"
 
 - clean:
-    ~/: true
     ~/.config:
       recursive: true
 
