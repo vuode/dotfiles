@@ -8,7 +8,20 @@ install_brew() {
     return
   fi
 
-  printf "Not implemented [TODO]\n"
+  if [ -n "$(command -v brew)" ]; then
+    printf "Already installed\n"
+    return
+  fi
+
+  printf "Installing... [Output below]\n"
+
+  NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  if [ "$?" -gt 0 ]; then
+    printf "brew: Not installed [Error]\n"
+  else
+    printf "brew: Installed [Done]\n"
+  fi
 }
 
 install_oh_my_zsh() {
@@ -37,7 +50,14 @@ install_neovim() {
     sh -c "sudo apt install neovim -y" > /dev/null
     printf "[Done]\n"
   elif [ "$(uname)" = "Darwin" ]; then
-    printf "Not implemented [TODO]\n"
+    printf "Installing... [Output below]\n"
+    sh -c "brew install neovim"
+
+    if [ "$?" -gt 0 ]; then
+      printf "neovim: Not installed [Error]\n"
+    else
+      printf "neovim: Installed [Done]\n"
+    fi
   else
     printf "OS not supported\n"
   fi
